@@ -17,6 +17,7 @@ prisma/
 *.db
 *.sqlite
 prisma/dev.db
+generated/prisma
 
 # === Build Output ===
 dist/
