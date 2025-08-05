@@ -15,9 +15,31 @@ datasource db {
 }
 
 model User {
-  id String @id @default(cuid())
-  name String @unique
-  email String @unique
-  password String
+  id        String   @id @default(cuid())
+  name      String   @unique
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  Form      Form[]
+}
+
+model Form {
+  id          String       @id @default(cuid())
+  user        User         @relation(fields: [userId], references: [id])
+  userId      String
+  title       String
+  description String?
+  slug        String       @unique
+  fields      Json
+  submission  Submission[]
+  webhookUrl  String? // optional
+  createdAt   DateTime     @default(now())
+}
+
+model Submission {
+  id        String   @id @default(cuid())
+  form      Form     @relation(fields: [formId], references: [id])
+  formId    String
+  data      Json
   createdAt DateTime @default(now())
 }

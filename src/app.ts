@@ -19,4 +19,10 @@ app.get("/user", async (_, res) => {
     await prisma.$disconnect();
   }
 });
+
+
+// import routes
+import healthRoute from "./routes/health.route";
+// use route
+app.use("/health", healthRoute);
 export default app;
